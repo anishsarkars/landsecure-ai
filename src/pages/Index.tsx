@@ -11,6 +11,10 @@ import {
   RoleSection,
   CTASection,
 } from "@/components";
+import SearchSection from "@/components/SearchSection";
+import BankIntegrationSection from "@/components/BankIntegrationSection";
+import VerificationSection from "@/components/VerificationSection";
+import AuctionSection from "@/components/AuctionSection";
 import { setupScrollAnimations } from "@/utils/animationObserver";
 
 const Index = () => {
@@ -31,11 +35,15 @@ const Index = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       
-      <main className="flex-grow">
+      <main className="flex-grow pt-16">
         <HeroSection />
+        <SearchSection />
         <FeatureSection />
         <DemoSection />
         <RiskSection />
+        <BankIntegrationSection />
+        <VerificationSection />
+        <AuctionSection />
         <TestimonialSection />
         <RoleSection />
         <CTASection />
