@@ -1,12 +1,47 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from "react";
+import {
+  Navbar,
+  Footer,
+  HeroSection,
+  FeatureSection,
+  DemoSection,
+  RiskSection,
+  TestimonialSection,
+  RoleSection,
+  CTASection,
+} from "@/components";
+import { setupScrollAnimations } from "@/utils/animationObserver";
 
 const Index = () => {
+  useEffect(() => {
+    // Set up scroll animations
+    const cleanup = setupScrollAnimations();
+    
+    // Smooth scroll behavior for the entire page
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    return () => {
+      cleanup();
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
+      <main className="flex-grow">
+        <HeroSection />
+        <FeatureSection />
+        <DemoSection />
+        <RiskSection />
+        <TestimonialSection />
+        <RoleSection />
+        <CTASection />
+      </main>
+      
+      <Footer />
     </div>
   );
 };
