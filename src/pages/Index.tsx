@@ -15,12 +15,18 @@ import SearchSection from "@/components/SearchSection";
 import BankIntegrationSection from "@/components/BankIntegrationSection";
 import VerificationSection from "@/components/VerificationSection";
 import AuctionSection from "@/components/AuctionSection";
-import { setupScrollAnimations } from "@/utils/animationObserver";
+import { setupEnhancedScrollAnimations, animateElementsInView, setupHoverAnimations } from "@/utils/animationUtils";
 
 const Index = () => {
   useEffect(() => {
-    // Set up scroll animations
-    const cleanup = setupScrollAnimations();
+    // Set up enhanced scroll animations
+    const cleanup = setupEnhancedScrollAnimations();
+    
+    // Animate elements already in view
+    animateElementsInView();
+    
+    // Setup hover animations
+    setupHoverAnimations();
     
     // Smooth scroll behavior for the entire page
     document.documentElement.style.scrollBehavior = 'smooth';

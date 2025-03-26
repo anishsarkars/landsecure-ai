@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import PropertyDetails from "./pages/PropertyDetails";
+import SearchResults from "./pages/SearchResults";
 
 // Create a client outside of the component
 const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/property/:id" element={<PropertyDetails />} />
+              <Route path="/search" element={<SearchResults />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
