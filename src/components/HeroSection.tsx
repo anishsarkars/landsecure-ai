@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Search, FileCheck } from "lucide-react";
+import { Search, FileCheck, Check } from "lucide-react";
 
 const HeroSection = () => {
   return (

@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -96,7 +95,8 @@ const MapComponent = () => {
             coordinates: [[
               [68.1, 8.0], [97.4, 8.0], [97.4, 37.0], [68.1, 37.0], [68.1, 8.0]
             ]]
-          }
+          },
+          properties: {} // Added empty properties object to satisfy the GeoJSON type
         }
       });
       
