@@ -9,3 +9,4 @@ export { default as TestimonialSection } from './TestimonialSection';
 export { default as RoleSection } from './RoleSection';
 export { default as CTASection } from './CTASection';
 export { default as MapComponent } from './MapComponent';
+export { default as MapPreview } from './MapPreview';

@@ -1,7 +1,9 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Check, Info, X } from 'lucide-react';
+import { createMarkerElement, formatLandStatus, getStatusClasses } from '@/utils/mapHelpers';
 
 // Land plot marker data for demonstration
 const PLOT_DATA = [
@@ -115,14 +117,15 @@ const MapComponent = () => {
 
       // Add land plot markers
       PLOT_DATA.forEach(plot => {
-        // Create marker element
-        const markerEl = document.createElement('div');
-        markerEl.className = `plot-marker ${plot.status}`;
-        markerEl.id = `marker-${plot.id}`;
-        markerEl.addEventListener('click', () => {
-          setActiveMarker(plot.id);
-          showPopup(plot);
-        });
+        // Create marker element with our utility function
+        const markerEl = createMarkerElement(
+          plot.status as 'legal' | 'illegal' | 'govt' | 'no-registry',
+          plot.id,
+          () => {
+            setActiveMarker(plot.id);
+            showPopup(plot);
+          }
+        );
 
         // Add marker to map
         new mapboxgl.Marker(markerEl)
@@ -146,15 +149,11 @@ const MapComponent = () => {
       titleEl.className = 'font-semibold text-sm';
       titleEl.textContent = plot.plot;
       
-      const statusClass = 
-        plot.status === 'legal' ? 'bg-green-100 text-green-800' : 
-        plot.status === 'illegal' ? 'bg-red-100 text-red-800' :
-        plot.status === 'govt' ? 'bg-blue-100 text-blue-800' :
-        'bg-yellow-100 text-yellow-800';
+      const statusClass = getStatusClasses(plot.status as 'legal' | 'illegal' | 'govt' | 'no-registry');
       
       const statusEl = document.createElement('span');
       statusEl.className = `text-xs px-2 py-0.5 rounded-full ${statusClass} inline-block mt-1`;
-      statusEl.textContent = plot.status.charAt(0).toUpperCase() + plot.status.slice(1);
+      statusEl.textContent = formatLandStatus(plot.status);
       
       const detailsEl = document.createElement('div');
       detailsEl.className = 'mt-2 text-xs space-y-1 text-gray-600';

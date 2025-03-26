@@ -1,189 +1,300 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+ 
 @layer base {
   :root {
-    --background: 210 40% 98%;
+    --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
+ 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 201 96% 32%;
+ 
+    --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
-
+ 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
+ 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
+ 
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
+ 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-
-    --radius: 0.75rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+ 
+    --radius: 0.5rem;
   }
-
+ 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
+ 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
+ 
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 201 96% 32%;
+ 
+    --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
+ 
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
+ 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
+ 
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
+ 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
+ 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 201 96% 32%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
-
+ 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground;
   }
 }
 
+/* LandSecure Custom Styles */
 @layer components {
+  /* Glass Effect */
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-glass;
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-sm;
   }
   
   .glass-card {
-    @apply rounded-xl glass-effect p-6 transition-all duration-300 hover:shadow-card-hover;
+    @apply bg-white/80 backdrop-blur-sm border border-white/20 shadow-sm rounded-xl p-6 transition-all duration-300;
   }
   
+  /* Feature Icons */
   .feature-icon-wrapper {
-    @apply relative flex items-center justify-center w-12 h-12 mb-4 rounded-full text-white;
+    @apply relative w-12 h-12 rounded-full flex items-center justify-center mb-4;
   }
   
   .feature-icon-bg {
     @apply absolute inset-0 rounded-full opacity-20;
   }
   
-  .text-balance {
-    text-wrap: balance;
+  /* Animations */
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
   }
-}
-
-.scroll-animations [data-animate] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.scroll-animations [data-animate].animate {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Map Styles */
-.mapboxgl-ctrl-attrib-inner {
-  display: none;
-}
-
-.map-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
-
-.map-container .mapboxgl-map {
-  width: 100%;
-  height: 100%;
-}
-
-.map-gradient-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 150px;
-  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8));
-  pointer-events: none;
-  z-index: 10;
-}
-
-.plot-marker {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
-}
-
-.plot-marker:hover {
-  transform: scale(1.2);
-}
-
-.plot-marker.legal {
-  background-color: theme('colors.risk.low');
-}
-
-.plot-marker.illegal {
-  background-color: theme('colors.risk.high');
-}
-
-.plot-marker.govt {
-  background-color: theme('colors.landsecure.500');
-}
-
-.plot-marker.no-registry {
-  background-color: theme('colors.risk.medium');
+  
+  .animate-pulse-soft {
+    animation: pulse-soft 3s infinite;
+  }
+  
+  .scroll-animations [data-animate] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  
+  .scroll-animations [data-animate].animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Map styles */
+  .map-gradient-overlay {
+    @apply absolute inset-0 pointer-events-none bg-gradient-to-b from-transparent to-white/5;
+  }
+  
+  /* Plot markers */
+  .plot-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .plot-marker:hover {
+    transform: scale(1.2);
+  }
+  
+  .plot-marker.legal {
+    background-color: #22c55e; /* Green (Low risk) */
+  }
+  
+  .plot-marker.illegal {
+    background-color: #ef4444; /* Red (High risk) */
+  }
+  
+  .plot-marker.govt {
+    background-color: #0ea5e9; /* Blue (LandSecure) */
+  }
+  
+  .plot-marker.no-registry {
+    background-color: #f59e0b; /* Amber (Medium risk) */
+  }
+  
+  /* Custom mapbox popup styles */
+  .land-plot-popup .mapboxgl-popup-content {
+    padding: 0 !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(4px);
+  }
+  
+  .land-plot-popup .mapboxgl-popup-close-button {
+    color: #64748b;
+    font-size: 16px;
+    padding: 4px 8px;
+    right: 2px;
+    top: 2px;
+  }
+  
+  .land-plot-popup .mapboxgl-popup-close-button:hover {
+    background: transparent;
+    color: #334155;
+  }
+  
+  /* Risk colors */
+  :root {
+    --risk-low: #22c55e;   /* Green */
+    --risk-medium: #f59e0b; /* Amber */
+    --risk-high: #ef4444;   /* Red */
+    --landsecure-50: #f0f9ff;
+    --landsecure-100: #e0f2fe;
+    --landsecure-200: #bae6fd;
+    --landsecure-300: #7dd3fc;
+    --landsecure-400: #38bdf8;
+    --landsecure-500: #0ea5e9;
+    --landsecure-600: #0284c7;
+    --landsecure-700: #0369a1;
+    --landsecure-800: #075985;
+    --landsecure-900: #0c4a6e;
+    --landsecure-950: #082f49;
+  }
+  
+  .bg-risk-low {
+    background-color: var(--risk-low);
+  }
+  
+  .bg-risk-medium {
+    background-color: var(--risk-medium);
+  }
+  
+  .bg-risk-high {
+    background-color: var(--risk-high);
+  }
+  
+  .text-risk-low {
+    color: var(--risk-low);
+  }
+  
+  .text-risk-medium {
+    color: var(--risk-medium);
+  }
+  
+  .text-risk-high {
+    color: var(--risk-high);
+  }
+  
+  /* Color classes for LandSecure brand */
+  .bg-landsecure-50 {
+    background-color: var(--landsecure-50);
+  }
+  
+  .bg-landsecure-100 {
+    background-color: var(--landsecure-100);
+  }
+  
+  .bg-landsecure-500 {
+    background-color: var(--landsecure-500);
+  }
+  
+  .bg-landsecure-600 {
+    background-color: var(--landsecure-600);
+  }
+  
+  .bg-landsecure-700 {
+    background-color: var(--landsecure-700);
+  }
+  
+  .bg-landsecure-800 {
+    background-color: var(--landsecure-800);
+  }
+  
+  .text-landsecure-50 {
+    color: var(--landsecure-50);
+  }
+  
+  .text-landsecure-100 {
+    color: var(--landsecure-100);
+  }
+  
+  .text-landsecure-500 {
+    color: var(--landsecure-500);
+  }
+  
+  .text-landsecure-600 {
+    color: var(--landsecure-600);
+  }
+  
+  .text-landsecure-700 {
+    color: var(--landsecure-700);
+  }
+  
+  .border-landsecure-200 {
+    border-color: var(--landsecure-200);
+  }
+  
+  .border-landsecure-600 {
+    border-color: var(--landsecure-600);
+  }
+  
+  /* Animations */
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  
+  @keyframes pulse-soft {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
