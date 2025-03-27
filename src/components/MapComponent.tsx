@@ -85,7 +85,7 @@ const MapComponent = () => {
       animateMarkers();
       
       // Fix: Convert string to number
-      const toastDuration = 3000;
+      const toastDuration = 3000; // Make sure this is a number, not a string
       // Notify user that the map has loaded
       toast({
         title: "Map loaded successfully",
@@ -246,7 +246,7 @@ const MapComponent = () => {
     popupRef.current = new mapboxgl.Popup({ 
       closeButton: true,
       closeOnClick: false,
-      maxWidth: '240px',
+      maxWidth: 240, // Fix: Convert string '240px' to number 240 (the 'px' is added by mapbox)
       className: 'land-plot-popup'
     })
       .setLngLat([record.location.lng, record.location.lat])
