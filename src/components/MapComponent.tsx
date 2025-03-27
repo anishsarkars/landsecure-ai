@@ -25,7 +25,9 @@ const MapComponent = () => {
     // Initialize map
     mapboxgl.accessToken = MAPBOX_TOKEN;
     
-    const centerCoordinates = [78.9629, 20.5937]; // India center
+    // Fix: Type 'number[]' is not assignable to type 'LngLatLike'
+    // Convert to LngLat object
+    const centerCoordinates: mapboxgl.LngLatLike = [78.9629, 20.5937]; // India center
     
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -82,11 +84,13 @@ const MapComponent = () => {
       // Add animation to markers
       animateMarkers();
       
+      // Fix: Convert string to number
+      const toastDuration = 3000;
       // Notify user that the map has loaded
       toast({
         title: "Map loaded successfully",
         description: "Showing land records from across India",
-        duration: 3000,
+        duration: toastDuration,
       });
     });
 

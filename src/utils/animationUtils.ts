@@ -18,7 +18,9 @@ export const setupEnhancedScrollAnimations = () => {
   
   // Set up standard animations
   animateElements.forEach((element) => {
-    const delay = element.getAttribute('data-delay') || 0;
+    const delayAttr = element.getAttribute('data-delay');
+    // Fix: Convert string to number or use 0 as default
+    const delay = delayAttr ? parseFloat(delayAttr) : 0;
     
     gsap.fromTo(
       element,
@@ -30,7 +32,7 @@ export const setupEnhancedScrollAnimations = () => {
         y: 0,
         opacity: 1,
         duration: 0.8,
-        delay: parseFloat(delay),
+        delay: delay,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: element,
@@ -44,7 +46,9 @@ export const setupEnhancedScrollAnimations = () => {
   // Set up staggered animations
   staggerElements.forEach((parent) => {
     const children = parent.querySelectorAll('[data-stagger-item]');
-    const staggerAmount = parent.getAttribute('data-stagger-amount') || 0.1;
+    const staggerAmountAttr = parent.getAttribute('data-stagger-amount');
+    // Fix: Convert string to number or use 0.1 as default
+    const staggerAmount = staggerAmountAttr ? parseFloat(staggerAmountAttr) : 0.1;
     
     gsap.fromTo(
       children,
@@ -56,7 +60,7 @@ export const setupEnhancedScrollAnimations = () => {
         y: 0,
         opacity: 1,
         duration: 0.6,
-        stagger: parseFloat(staggerAmount),
+        stagger: staggerAmount,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: parent,
@@ -69,13 +73,15 @@ export const setupEnhancedScrollAnimations = () => {
   
   // Set up parallax effect
   parallaxElements.forEach((element) => {
-    const strength = element.getAttribute('data-parallax-strength') || 30;
+    const strengthAttr = element.getAttribute('data-parallax-strength');
+    // Fix: Convert string to number or use 30 as default
+    const strength = strengthAttr ? parseFloat(strengthAttr) : 30;
     
     gsap.fromTo(
       element,
       { y: 0 },
       {
-        y: -parseFloat(strength),
+        y: -strength,
         ease: 'none',
         scrollTrigger: {
           trigger: element.parentElement || element,
@@ -90,28 +96,31 @@ export const setupEnhancedScrollAnimations = () => {
   // Set up fade animations
   fadeElements.forEach((element) => {
     const direction = element.getAttribute('data-fade-direction') || 'up';
-    const distance = element.getAttribute('data-fade-distance') || 50;
-    let fromVars = { opacity: 0 };
+    const distanceAttr = element.getAttribute('data-fade-distance');
+    const distance = distanceAttr ? parseFloat(distanceAttr) : 50;
+    
+    // Fix: Properly set variables for different directions
+    let fromObj: {opacity: number, y?: number, x?: number} = { opacity: 0 };
     
     // Set direction of fade
     switch(direction) {
       case 'up':
-        fromVars = { ...fromVars, y: distance };
+        fromObj = { ...fromObj, y: distance };
         break;
       case 'down':
-        fromVars = { ...fromVars, y: -distance };
+        fromObj = { ...fromObj, y: -distance };
         break;
       case 'left':
-        fromVars = { ...fromVars, x: distance };
+        fromObj = { ...fromObj, x: distance };
         break;
       case 'right':
-        fromVars = { ...fromVars, x: -distance };
+        fromObj = { ...fromObj, x: -distance };
         break;
     }
     
     gsap.fromTo(
       element,
-      fromVars,
+      fromObj,
       {
         opacity: 1,
         x: 0,
@@ -129,12 +138,14 @@ export const setupEnhancedScrollAnimations = () => {
   
   // Set up scale animations
   scaleElements.forEach((element) => {
-    const from = element.getAttribute('data-scale-from') || 0.8;
+    const fromAttr = element.getAttribute('data-scale-from');
+    // Fix: Convert string to number or use 0.8 as default
+    const from = fromAttr ? parseFloat(fromAttr) : 0.8;
     
     gsap.fromTo(
       element,
       { 
-        scale: parseFloat(from), 
+        scale: from, 
         opacity: 0 
       },
       {
@@ -153,12 +164,14 @@ export const setupEnhancedScrollAnimations = () => {
   
   // Set up rotate animations
   rotateElements.forEach((element) => {
-    const from = element.getAttribute('data-rotate-from') || -5;
+    const fromAttr = element.getAttribute('data-rotate-from');
+    // Fix: Convert string to number or use -5 as default
+    const from = fromAttr ? parseFloat(fromAttr) : -5;
     
     gsap.fromTo(
       element,
       { 
-        rotation: parseFloat(from), 
+        rotation: from, 
         opacity: 0 
       },
       {
