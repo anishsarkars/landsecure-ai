@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, MapPin, Filter } from 'lucide-react';
+import { Search, MapPin, Filter, Home, Landmark, Building } from 'lucide-react';
 import {
   Select,
   SelectContent,
@@ -13,15 +13,15 @@ import {
 
 const SearchSection = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-white to-gray-50">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
+          <div className="text-center mb-10" data-animate>
             <h2 className="text-3xl font-bold text-gray-900">Find and verify any property</h2>
             <p className="mt-3 text-gray-600">Search by location, risk level, or property type to get instant verification</p>
           </div>
           
-          <div className="bg-white rounded-xl shadow-xl overflow-hidden p-1">
+          <div className="bg-white rounded-xl shadow-xl overflow-hidden p-1" data-animate data-delay="0.2">
             <div className="flex flex-col md:flex-row">
               <div className="flex-1 p-3 border-b md:border-b-0 md:border-r border-gray-100">
                 <label className="block text-xs font-medium text-gray-500 mb-1.5">Location</label>
@@ -67,7 +67,7 @@ const SearchSection = () => {
               </div>
               
               <div className="p-3 flex items-end">
-                <Button className="bg-landsecure-600 hover:bg-landsecure-700 text-white px-6 rounded-lg h-10">
+                <Button className="bg-gray-900 hover:bg-gray-800 text-white px-6 rounded-lg h-10">
                   <Search className="h-4 w-4 mr-2" />
                   Search
                 </Button>
@@ -85,7 +85,61 @@ const SearchSection = () => {
             </div>
           </div>
           
-          <div className="mt-6 text-center text-sm text-gray-500">
+          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4" data-stagger data-stagger-amount="0.1">
+            <div 
+              className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow cursor-pointer"
+              data-stagger-item
+              data-hover-animate
+              data-hover-effect="lift"
+            >
+              <div className="w-12 h-12 bg-landsecure-50 rounded-full flex items-center justify-center mb-3">
+                <Home className="h-6 w-6 text-landsecure-600" />
+              </div>
+              <h3 className="font-medium text-gray-900">Residential</h3>
+              <p className="text-xs text-gray-500 mt-1">8,234 properties</p>
+            </div>
+            
+            <div 
+              className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow cursor-pointer"
+              data-stagger-item
+              data-hover-animate
+              data-hover-effect="lift"
+            >
+              <div className="w-12 h-12 bg-landsecure-50 rounded-full flex items-center justify-center mb-3">
+                <Building className="h-6 w-6 text-landsecure-600" />
+              </div>
+              <h3 className="font-medium text-gray-900">Commercial</h3>
+              <p className="text-xs text-gray-500 mt-1">2,651 properties</p>
+            </div>
+            
+            <div 
+              className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow cursor-pointer"
+              data-stagger-item
+              data-hover-animate
+              data-hover-effect="lift"
+            >
+              <div className="w-12 h-12 bg-landsecure-50 rounded-full flex items-center justify-center mb-3">
+                <MapPin className="h-6 w-6 text-landsecure-600" />
+              </div>
+              <h3 className="font-medium text-gray-900">Agricultural</h3>
+              <p className="text-xs text-gray-500 mt-1">1,423 properties</p>
+            </div>
+            
+            <div 
+              className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm flex flex-col items-center text-center hover:shadow-md transition-shadow cursor-pointer"
+              data-stagger-item
+              data-hover-animate
+              data-hover-effect="lift"
+            >
+              <div className="w-12 h-12 bg-landsecure-50 rounded-full flex items-center justify-center mb-3">
+                <Landmark className="h-6 w-6 text-landsecure-600" />
+              </div>
+              <h3 className="font-medium text-gray-900">Government</h3>
+              <p className="text-xs text-gray-500 mt-1">837 properties</p>
+            </div>
+          </div>
+          
+          <div className="mt-6 text-center text-sm text-gray-500" data-animate>
             Popular searches: Delhi NCR, Mumbai Suburbs, Bangalore Tech Park, Chennai Coastal
           </div>
         </div>

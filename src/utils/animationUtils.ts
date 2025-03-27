@@ -19,7 +19,7 @@ export const setupEnhancedScrollAnimations = () => {
   // Set up standard animations
   animateElements.forEach((element) => {
     const delayAttr = element.getAttribute('data-delay');
-    // Fix: Convert string to number or use 0 as default
+    // Fix: Convert string to number
     const delay = delayAttr ? parseFloat(delayAttr) : 0;
     
     gsap.fromTo(
@@ -47,7 +47,7 @@ export const setupEnhancedScrollAnimations = () => {
   staggerElements.forEach((parent) => {
     const children = parent.querySelectorAll('[data-stagger-item]');
     const staggerAmountAttr = parent.getAttribute('data-stagger-amount');
-    // Fix: Convert string to number or use 0.1 as default
+    // Fix: Convert string to number
     const staggerAmount = staggerAmountAttr ? parseFloat(staggerAmountAttr) : 0.1;
     
     gsap.fromTo(
@@ -74,7 +74,7 @@ export const setupEnhancedScrollAnimations = () => {
   // Set up parallax effect
   parallaxElements.forEach((element) => {
     const strengthAttr = element.getAttribute('data-parallax-strength');
-    // Fix: Convert string to number or use 30 as default
+    // Fix: Convert string to number
     const strength = strengthAttr ? parseFloat(strengthAttr) : 30;
     
     gsap.fromTo(
@@ -139,7 +139,7 @@ export const setupEnhancedScrollAnimations = () => {
   // Set up scale animations
   scaleElements.forEach((element) => {
     const fromAttr = element.getAttribute('data-scale-from');
-    // Fix: Convert string to number or use 0.8 as default
+    // Fix: Convert string to number
     const from = fromAttr ? parseFloat(fromAttr) : 0.8;
     
     gsap.fromTo(
@@ -165,7 +165,7 @@ export const setupEnhancedScrollAnimations = () => {
   // Set up rotate animations
   rotateElements.forEach((element) => {
     const fromAttr = element.getAttribute('data-rotate-from');
-    // Fix: Convert string to number or use -5 as default
+    // Fix: Convert string to number
     const from = fromAttr ? parseFloat(fromAttr) : -5;
     
     gsap.fromTo(
@@ -301,5 +301,92 @@ export const counterAnimation = (element: HTMLElement | null, target: number, du
       const current = Math.round(this.targets()[0].count);
       element.textContent = `${prefix}${format.format(current)}${suffix}`;
     }
+  });
+};
+
+// Function to create parallax scrolling for background images
+export const setupParallaxBackgrounds = () => {
+  const parallaxBgs = document.querySelectorAll('[data-parallax-bg]');
+  
+  parallaxBgs.forEach((element) => {
+    const speedAttr = element.getAttribute('data-parallax-speed');
+    const speed = speedAttr ? parseFloat(speedAttr) : 0.2;
+    
+    gsap.to(element, {
+      backgroundPositionY: `${100 * speed}%`,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: element,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+  });
+};
+
+// Enhanced image reveal animations
+export const setupImageRevealAnimations = () => {
+  const revealImages = document.querySelectorAll('[data-image-reveal]');
+  
+  revealImages.forEach((imageContainer) => {
+    const image = imageContainer.querySelector('img');
+    if (!image) return;
+    
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'absolute inset-0 bg-landsecure-600 origin-left z-10';
+    imageContainer.classList.add('relative', 'overflow-hidden');
+    imageContainer.appendChild(overlay);
+    
+    // Set initial state
+    gsap.set(image, { scale: 1.2, opacity: 0 });
+    
+    // Create animation
+    ScrollTrigger.create({
+      trigger: imageContainer,
+      start: 'top 75%',
+      onEnter: () => {
+        gsap.to(overlay, {
+          scaleX: 0,
+          duration: 0.8,
+          ease: 'power3.inOut',
+          transformOrigin: 'right'
+        });
+        
+        gsap.to(image, {
+          scale: 1,
+          opacity: 1,
+          delay: 0.4,
+          duration: 0.8,
+          ease: 'power2.out'
+        });
+      }
+    });
+  });
+};
+
+// Add smooth scroll to anchor links
+export const setupSmoothScrolling = () => {
+  const anchorLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
+  
+  anchorLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      const targetId = link.getAttribute('href');
+      if (!targetId) return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (!targetElement) return;
+      
+      const offset = 100; // Offset in pixels
+      const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - offset;
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+      });
+    });
   });
 };

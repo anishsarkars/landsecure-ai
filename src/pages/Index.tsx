@@ -15,11 +15,21 @@ import SearchSection from "@/components/SearchSection";
 import BankIntegrationSection from "@/components/BankIntegrationSection";
 import VerificationSection from "@/components/VerificationSection";
 import AuctionSection from "@/components/AuctionSection";
-import { setupEnhancedScrollAnimations, animateElementsInView, setupHoverAnimations } from "@/utils/animationUtils";
+import FeaturedPropertiesSection from "@/components/FeaturedPropertiesSection";
+import FAQSection from "@/components/FAQSection";
+import { 
+  setupEnhancedScrollAnimations, 
+  animateElementsInView, 
+  setupHoverAnimations,
+  setupParallaxBackgrounds,
+  setupImageRevealAnimations,
+  setupSmoothScrolling,
+  counterAnimation 
+} from "@/utils/animationUtils";
 
 const Index = () => {
   useEffect(() => {
-    // Set up enhanced scroll animations
+    // Set up all animations
     const cleanup = setupEnhancedScrollAnimations();
     
     // Animate elements already in view
@@ -27,6 +37,22 @@ const Index = () => {
     
     // Setup hover animations
     setupHoverAnimations();
+
+    // Setup parallax backgrounds
+    setupParallaxBackgrounds();
+    
+    // Setup image reveal animations
+    setupImageRevealAnimations();
+    
+    // Setup smooth scrolling for anchor links
+    setupSmoothScrolling();
+    
+    // Set up counter animations
+    const counterElements = document.querySelectorAll('[data-counter]');
+    counterElements.forEach(el => {
+      const target = parseInt(el.getAttribute('data-counter') || '0', 10);
+      counterAnimation(el as HTMLElement, target);
+    });
     
     // Smooth scroll behavior for the entire page
     document.documentElement.style.scrollBehavior = 'smooth';
@@ -38,12 +64,12 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
       <Navbar />
       
-      <main className="flex-grow pt-16">
+      <main className="flex-grow">
         <HeroSection />
-        <SearchSection />
+        <FeaturedPropertiesSection />
         <FeatureSection />
         <DemoSection />
         <RiskSection />
@@ -51,6 +77,7 @@ const Index = () => {
         <VerificationSection />
         <AuctionSection />
         <TestimonialSection />
+        <FAQSection />
         <RoleSection />
         <CTASection />
       </main>

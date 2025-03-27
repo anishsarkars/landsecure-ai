@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { Check, Info, X, AlertTriangle } from 'lucide-react';
+import { Check, Info, X, AlertTriangle, Search } from 'lucide-react';
 import { createMarkerElement, formatLandStatus, getStatusClasses } from '@/utils/mapHelpers';
 import { landRecords, LandRecord, formatIndianCurrency, getRiskLevel } from '@/data/landData';
 import { useToast } from '@/hooks/use-toast';
@@ -25,8 +25,7 @@ const MapComponent = () => {
     // Initialize map
     mapboxgl.accessToken = MAPBOX_TOKEN;
     
-    // Fix: Type 'number[]' is not assignable to type 'LngLatLike'
-    // Convert to LngLat object
+    // Fix: Convert array to LngLatLike object that mapbox expects
     const centerCoordinates: mapboxgl.LngLatLike = [78.9629, 20.5937]; // India center
     
     map.current = new mapboxgl.Map({
@@ -84,7 +83,6 @@ const MapComponent = () => {
       // Add animation to markers
       animateMarkers();
       
-      // Fix: Convert string to number
       const toastDuration = 3000; // Make sure this is a number, not a string
       // Notify user that the map has loaded
       toast({
@@ -246,7 +244,7 @@ const MapComponent = () => {
     popupRef.current = new mapboxgl.Popup({ 
       closeButton: true,
       closeOnClick: false,
-      maxWidth: 240, // Fix: Convert string '240px' to number 240 (the 'px' is added by mapbox)
+      maxWidth: 240, // Fix: using number instead of string
       className: 'land-plot-popup'
     })
       .setLngLat([record.location.lng, record.location.lat])
@@ -299,7 +297,7 @@ const MapComponent = () => {
           className="text-sm bg-transparent border-none outline-none flex-1 text-gray-700 placeholder-gray-400"
         />
         <button className="text-landsecure-600 hover:text-landsecure-700 transition-colors">
-          <AlertTriangle size={16} />
+          <Search size={16} />
         </button>
       </div>
     </div>
