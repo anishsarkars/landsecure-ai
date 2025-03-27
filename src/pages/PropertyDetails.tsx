@@ -475,7 +475,7 @@ const PropertyDetails = () => {
                             <div className="flex flex-col">
                               <span className="text-sm font-medium text-gray-900">{owner}</span>
                               <span className="text-xs text-gray-500">
-                                {index === 0 ? 'Original Owner' : `Previous Owner'} 
+                                {index === 0 ? 'Original Owner' : 'Previous Owner'} 
                                 {property.history.transferDates[index] && ` (until ${new Date(property.history.transferDates[index]).toLocaleDateString()})`}
                               </span>
                             </div>
